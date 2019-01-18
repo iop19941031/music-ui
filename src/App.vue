@@ -1,10 +1,19 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    </div> -->
+     <el-container style="height: 800px; border: 1px solid #eee">
+      <el-container>
+        <el-main>
+          <router-view name="main" class="main" />
+          </el-main>
+        <el-footer>
+          <router-view name="bottom" class="bottom"/>
+        </el-footer>
+      </el-container>
+    </el-container>
   </div>
 </template>
 

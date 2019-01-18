@@ -3,14 +3,15 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const music = {
+  namespaced: true,
   state: {
-
-  },
-  mutations: {
-
-  },
-  actions: {
-
+    list: []
+  }
+}
+export default new Vuex.Store({
+  strict: true,
+  modules: {
+    music
   }
 })

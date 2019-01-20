@@ -36,6 +36,7 @@ export default {
     },
     axiosList () {
       // console.log(this.musicList + '22222222222')
+      this.loading = true
       axios.get('http://localhost:3000/music/list').then(response => {
         console.log(`歌曲数量：${response.data.length}`)
         this.setList([])
@@ -45,6 +46,7 @@ export default {
             name: response.data[i]
           }
           this.addList(data)
+          this.loading = false
         }
       }).catch(function (error) {
         console.log(error)

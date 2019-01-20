@@ -22,6 +22,14 @@ import { mapState, mapMutations, mapGetters } from 'vuex'
 export default {
   mounted () {
     this.$refs.audio.onended = () => {
+      const h = {
+        before: {},
+        name: this.name
+      }
+      const a = {
+        before: h,
+        name: this.getList[random].name
+      }
       const random = Math.floor(Math.random() * 1580) + 1
       this.setName(`http://localhost:3000/CloudMusic/${this.getList[random].name}`)
       // alert("音频已播放完成")

@@ -6,6 +6,7 @@ Vue.use(Vuex)
 const music = {
   namespaced: true,
   state: {
+    history: {},
     name: '空',
     list: []
   },

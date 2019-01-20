@@ -4,12 +4,15 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div> -->
-     <el-container style="height: 800px; border: 1px solid #eee">
+     <el-container style="height: 900px; border: 1px solid #eee">
       <el-container>
+        <el-header>
+
+        </el-header>
         <el-main>
           <router-view name="main" class="main" />
-          </el-main>
-        <el-footer>
+        </el-main>
+        <el-footer class="footer">
           <router-view name="bottom" class="bottom"/>
         </el-footer>
       </el-container>
@@ -24,15 +27,8 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+  .footer {
+    border-top: 1px solid #90939945
   }
 }
 </style>

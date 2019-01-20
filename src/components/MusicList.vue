@@ -1,16 +1,11 @@
 <template>
   <div>
-    <button @click="testAxios">axios</button>
-    <!-- <ol>
-      <li v-for="todo in musicList">
-        {{ todo.text }}--- {{todo}}
-      </li>
-    </ol> -->
-
+    <button @click="axiosList">加载音乐</button>
     <el-table
       v-loading="loading"
-      :data="tableData"
-      style="width: 100%">
+      :data="list"
+      style="width: 100%"
+      @row-click="rowClickEvent">
       <el-table-column
         prop="id"
         label="序号"
@@ -20,43 +15,45 @@
         prop="name"
         label="歌名">
       </el-table-column>
-      <el-table-column
-        prop="time"
-        label="时长"
-        width="180">
-      </el-table-column>
     </el-table>
   </div>
 </template>
 
 <script>
 // import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 import axios from 'axios'
 export default {
   data () {
     return {
-      tableData: [],
       loading: false
     }
   },
   methods: {
-    testAxios () {
-      console.log(this.musicList + '22222222222')
+    rowClickEvent (row, event, column) {
+      // console.log(`id:${row.id},name:${row.name}`)
+      this.setName(`http://localhost:3000/CloudMusic/${row.name}`);
+    },
+    axiosList () {
+      // console.log(this.musicList + '22222222222')
       axios.get('http://localhost:3000/music/list').then(response => {
         console.log(`歌曲数量：${response.data.length}`)
-        this.tableData = []
-        for (let i = 0; i < response.data.length; i++) {
+        this.setList([])
+        for (let i = 1; i < response.data.length; i++) {
           let data = {
-            id: i + 1,
-            name: response.data[i],
-            time: 0
+            id: i,
+            name: response.data[i]
           }
-          this.tableData.push(data)
+          this.addList(data)
         }
       }).catch(function (error) {
         console.log(error)
       })
-    }
+    },
+    ...mapMutations ('music', ['setName', 'setList', 'addList'])
+  },
+  computed: {
+    ...mapState ('music', ['name', 'list'])
   }
 }
 </script>

@@ -1,42 +1,40 @@
 <template>
   <div class="music">
-    <h3>{{a}}</h3>
+    <h3>{{getName}}</h3>
     <audio
+    autoplay="autoplay"
     controls="controls"
     ref="audio"
     @pause="onPause"
     @play="onPlay"
-    :src="a"
+    :src="getName"
     type="audio/mpeg"
     preload="meta">
       Your browser does not support the <code>audio</code> element.
       <!-- <source src="../../music/1.mp3"  type="audio/mpeg"> -->
     </audio>
-    <br>
-    <button @click="ab" :id=a>????</button>
-    <br>
-    <button @click="cheak" :id=a>cheakcheakcheak</button>
   </div>
 </template>
 
 <script>
-// import { mapState } from 'vuex'
+import { mapState, mapMutations, mapGetters } from 'vuex'
 // import axios from 'axios'
 export default {
+  mounted () {
+    this.$refs.audio.onended = () => {
+      const random = Math.floor(Math.random() * 1580) + 1
+      this.setName(`http://localhost:3000/CloudMusic/${this.getList[random].name}`)
+      // alert("音频已播放完成")
+    }
+  },
   data () {
     return {
-      playing: false,
-      a: 'http://localhost:3000/CloudMusic/渕上舞 - 薄荷.mp3',
-      musicList: []
+      playing: false
     }
   },
   methods: {
-    cheak () {
-      this.playing = false
-      this.a = 'http://localhost:3000/CloudMusic/雨宮天 - 奏(かなで) -TV size ver.-.mp3'
-    },
-    ab () {
-      return this.playing ? this.$refs.audio.pause() : this.$refs.audio.play()
+    play () {
+      this.$refs.audio.play()
     },
     onPlay () {
       this.playing = true
@@ -44,7 +42,12 @@ export default {
     // 当音频暂停
     onPause () {
       this.playing = false
-    }
+    },
+    ...mapMutations ('music', ['setName'])
+  },
+  computed: {
+    ...mapState ('music', ['name']),
+    ...mapGetters ('music', ['getName', 'getList'])
   }
 }
 </script>

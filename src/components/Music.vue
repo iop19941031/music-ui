@@ -23,7 +23,7 @@ export default {
   mounted () {
     this.$refs.audio.onended = () => {
       const h = {
-        before: {},
+        before: null,
         name: this.name
       }
       const a = {

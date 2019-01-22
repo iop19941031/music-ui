@@ -6,11 +6,18 @@ Vue.use(Vuex)
 const music = {
   namespaced: true,
   state: {
-    history: {},
+    history: [],
+    historyIndex: 0,
     name: '空',
     list: []
   },
   mutations: {
+    addHistory (state, node) {
+      state.history.unshift(node)
+    },
+    addHistoryIndex (state, index) {
+      state.historyIndex = index
+    },
     setName (state, name) {
       state.name = name
     },

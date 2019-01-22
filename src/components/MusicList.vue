@@ -32,7 +32,8 @@ export default {
   methods: {
     rowClickEvent (row, event, column) {
       // console.log(`id:${row.id},name:${row.name}`)
-      this.setName(`http://localhost:3000/CloudMusic/${row.name}`);
+      this.setName(`http://localhost:3000/CloudMusic/${row.name}`)
+      this.addHistory(row.name)
     },
     axiosList () {
       // console.log(this.musicList + '22222222222')
@@ -52,7 +53,7 @@ export default {
         console.log(error)
       })
     },
-    ...mapMutations ('music', ['setName', 'setList', 'addList'])
+    ...mapMutations ('music', ['setName', 'setList', 'addList', 'addHistory'])
   },
   computed: {
     ...mapState ('music', ['name', 'list'])

@@ -4,7 +4,7 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div> -->
-     <el-container style="height: 900px; border: 1px solid #eee">
+     <el-container style="height: 850px; border: 1px solid #eee">
       <el-container>
         <el-header>
 

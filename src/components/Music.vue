@@ -26,10 +26,7 @@ export default {
   mounted () {
     // 音乐播放结束
     this.$refs.audio.onended = () => {
-      // const currentMusicName = this.list[Math.floor(Math.random() * (1581 - 1)) + 1].name
-      const currentMusicName = this.list[Math.floor(Math.random() * (47 - 1)) + 1].name
-      this.addHistory(currentMusicName)
-      this.setName(`http://localhost:3000/CloudMusic/${currentMusicName}`)
+      this.newMusic()
     }
   },
   data () {
@@ -38,13 +35,18 @@ export default {
     }
   },
   methods: {
+    newMusic () {
+      const currentMusicName = this.list[Math.floor(Math.random() * (2585 - 1)) + 1].name
+      this.addHistory(currentMusicName)
+      this.setName(this.musicApi + currentMusicName)
+    },
     // 上一首歌功能
     before () {
       if (this.historyIndex < (this.history.length - 1)) {
         this.addHistoryIndex(this.historyIndex + 1)
-        this.setName(`http://localhost:3000/CloudMusic/${this.history[this.historyIndex]}`)
+        this.setName(this.musicApi + this.history[this.historyIndex])
       } else {
-        console.log(2222222)
+        console.log('前面没有播放记录')
       }
     },
     // 下一首歌功能
@@ -52,11 +54,9 @@ export default {
       if (this.history.length !== 0) {
         if (this.historyIndex !== 0) {
           this.addHistoryIndex(this.historyIndex - 1)
-          this.setName(`http://localhost:3000/CloudMusic/${this.history[this.historyIndex]}`)
+          this.setName(this.musicApi + this.history[this.historyIndex])
         } else {
-          const currentMusicName = this.list[Math.floor(Math.random() * (47 - 1)) + 1].name
-          this.addHistory(currentMusicName)
-          this.setName(`http://localhost:3000/CloudMusic/${currentMusicName}`)
+          this.newMusic()
         }
       } else {
         console.log('请加载')
@@ -76,10 +76,10 @@ export default {
     onPause () {
       this.playing = false
     },
-    ...mapMutations ('music', ['setName', 'addHistory', 'addHistoryIndex'])
+    ...mapMutations('music', ['setName', 'addHistory', 'addHistoryIndex'])
   },
   computed: {
-    ...mapState ('music', ['name', 'list', 'history', 'historyIndex'])
+    ...mapState('music', ['name', 'list', 'history', 'historyIndex', 'musicApi'])
   }
 }
 </script>

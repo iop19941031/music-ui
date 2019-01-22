@@ -6,9 +6,13 @@ Vue.use(Vuex)
 const music = {
   namespaced: true,
   state: {
+    apiAddress: 'http://localhost:3000/music/list',
+    musicApi: 'http://localhost:3000/CloudMusic/',
     history: [],
     historyIndex: 0,
     name: '空',
+    tableList: [],
+    showListIndex: 0,
     list: []
   },
   mutations: {
@@ -26,6 +30,15 @@ const music = {
     },
     addList (state, data) {
       state.list.push(data)
+    },
+    setShowListIndex (state, index) {
+      state.showListIndex = index
+    },
+    addTableList (state, data) {
+      state.tableList.push(data)
+    },
+    setTableList (state, list) {
+      state.tableList = list
     }
   },
   getters: {

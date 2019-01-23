@@ -42,20 +42,23 @@ export default {
       console.log(`当前显示音乐数量:${this.showListIndex}`)
     },
     rowClickEvent (row, event, column) {
-      this.setName(this.musicApi + row.name)
-      this.addHistory(row.name)
+      const node = {
+        current: row.name,
+        name: row.name,
+        src: this.musicApi + row.name
+      }
+      this.addHistory(node)
     },
     axiosList () {
       this.setLoading(true)
       axios.get(this.apiAddress).then(response => {
-        console.log(`歌曲数量：${response.data.length}`)
+        console.log(`歌曲数量：${response.data.length - 1}`)
         this.loadInit(response.data)
       }).catch(function (error) {
         console.log(error)
       })
     },
     ...mapMutations('music', [
-      'setName',
       'addHistory',
       'loadInsufficient',
       'loadSufficient',

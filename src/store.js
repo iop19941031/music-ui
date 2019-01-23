@@ -6,11 +6,12 @@ Vue.use(Vuex)
 const music = {
   namespaced: true,
   state: {
+    src: '',
     apiAddress: 'http://localhost:3000/music/list',
     musicApi: 'http://localhost:3000/CloudMusic/',
     history: [],
     historyIndex: 0,
-    name: '空',
+    name: '无播放音乐',
     tableList: [],
     showListIndex: 0,
     list: [],
@@ -18,11 +19,18 @@ const music = {
     loadMusicEvent: false
   },
   mutations: {
-    addHistory (state, node) {
-      state.history.unshift(node)
+    setSrc (state, src) {
+      state.src = src
     },
-    addHistoryIndex (state, index) {
-      state.historyIndex = index
+    addHistory (state, node) {
+      state.history.unshift(node.current)
+      state.name = node.name
+      state.src = node.src
+    },
+    addHistoryIndex (state, music) {
+      state.historyIndex = music.index
+      state.name = music.name
+      state.src = music.src
     },
     setName (state, name) {
       state.name = name

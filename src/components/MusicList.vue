@@ -1,6 +1,5 @@
 <template>
   <div>
-    <button @click="axiosList">加载音乐</button>
     <el-table
       v-loading="loading"
       :data="tableList"
@@ -29,6 +28,16 @@
 import { mapState, mapMutations } from 'vuex'
 import axios from 'axios'
 export default {
+  created () {
+    this.setLoading(true)
+    axios.get(this.apiAddress).then(response => {
+      
+      console.log(`歌曲数量：${response.data.length - 1}`)
+      this.loadInit(response.data)
+    }).catch(function (error) {
+      console.log(error)
+    })
+  },
   methods: {
     load () {
       const residueMusic = this.list.length - this.showListIndex
@@ -48,15 +57,6 @@ export default {
         src: this.musicApi + row.name
       }
       this.addHistory(node)
-    },
-    axiosList () {
-      this.setLoading(true)
-      axios.get(this.apiAddress).then(response => {
-        console.log(`歌曲数量：${response.data.length - 1}`)
-        this.loadInit(response.data)
-      }).catch(function (error) {
-        console.log(error)
-      })
     },
     ...mapMutations('music', [
       'addHistory',

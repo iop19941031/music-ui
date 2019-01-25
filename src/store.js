@@ -3,12 +3,18 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
+const api = {
+  namespaced: true,
+  state: {
+    apiAddress: 'http://localhost:3000/music/list',
+    musicApi: 'http://localhost:3000/CloudMusic/'
+  }
+}
+
 const music = {
   namespaced: true,
   state: {
     src: '',
-    apiAddress: 'http://localhost:3000/music/list',
-    musicApi: 'http://localhost:3000/CloudMusic/',
     history: [],
     historyIndex: 0,
     name: '无播放音乐',
@@ -101,6 +107,7 @@ const music = {
 export default new Vuex.Store({
   strict: true,
   modules: {
-    music
+    music,
+    api
   }
 })

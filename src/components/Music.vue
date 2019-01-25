@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     newMusic () {
-      const currentMusicName = this.list[Math.floor(Math.random() * (15 - 1)) + 1].name
+      const currentMusicName = this.list[Math.floor(Math.random() * (2585 - 1)) + 1].name
       const node = {
         current: currentMusicName,
         name: currentMusicName,
@@ -87,10 +87,6 @@ export default {
     },
     onPlay () {
       this.$refs.audio.pause()
-    },
-    // 当音频暂停
-    onPause () {
-      this.playing = false
     },
     ...mapMutations('music', ['addHistory', 'addHistoryIndex'])
   },

@@ -31,7 +31,6 @@ export default {
   created () {
     this.setLoading(true)
     axios.get(this.apiAddress).then(response => {
-      
       console.log(`歌曲数量：${response.data.length - 1}`)
       this.loadInit(response.data)
     }).catch(function (error) {
@@ -73,11 +72,10 @@ export default {
       'list',
       'showListIndex',
       'tableList',
-      'musicApi',
-      'apiAddress',
       'loading',
       'loadMusicEvent'
-    ])
+    ]),
+    ...mapState('api', ['musicApi', 'apiAddress'])
   }
 }
 </script>

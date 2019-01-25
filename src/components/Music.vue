@@ -89,13 +89,16 @@ export default {
       this.$alert(this.getHistoryList(), '播放历史', {
         showConfirmButton: false,
         closeOnPressEscape: true,
-        dangerouslyUseHTMLString: true
-      });
+        dangerouslyUseHTMLString: true,
+        customClass: 'history',
+        callback: () => {}
+      })
     },
     getHistoryList () {
+      this.historyList = ''
       this.history.forEach((item, index, array) => {
         this.historyList += `${item}<br />`
-      });
+      })
       return this.historyList
     },
     play () {

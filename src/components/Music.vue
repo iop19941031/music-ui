@@ -15,7 +15,11 @@
     <el-button type="info" @click="beforeButton" icon="el-icon-arrow-left" size="medium" circle></el-button>
     <el-button type="info" @click="onPlay" icon="el-icon-caret-right" circle></el-button>
     <el-button type="info" @click="laterButton" icon="el-icon-arrow-right" size="medium" circle></el-button>
-    <el-button type="info" @click="queryHistory" icon="el-icon-service" circle></el-button>
+    <el-tooltip content="播放历史" placement="right" :open-delay=500>
+      <el-badge :value="history.length" class="item">
+        <el-button type="info" @click="alertQueryHistory" icon="el-icon-service" circle></el-button>
+      </el-badge>
+    </el-tooltip>
   </div>
 </template>
 
@@ -31,10 +35,12 @@ export default {
   },
   data () {
     return {
+      historyList: '',
       playing: false
     }
   },
   methods: {
+    // 播放新的歌曲
     newMusic () {
       const currentMusicName = this.list[Math.floor(Math.random() * (2585 - 1)) + 1].name
       const node = {
@@ -78,9 +84,19 @@ export default {
         console.log('请加载')
       }
     },
-    queryHistory () {
-      console.log(`现在播放的音乐是：${this.history[this.historyIndex]}，第${this.historyIndex}首歌`)
-      console.log(this.history)
+    // 查询历史
+    alertQueryHistory () {
+      this.$alert(this.getHistoryList(), '播放历史', {
+        showConfirmButton: false,
+        closeOnPressEscape: true,
+        dangerouslyUseHTMLString: true
+      });
+    },
+    getHistoryList () {
+      this.history.forEach((item, index, array) => {
+        this.historyList += `${item}<br />`
+      });
+      return this.historyList
     },
     play () {
       this.$refs.audio.play()
@@ -91,7 +107,8 @@ export default {
     ...mapMutations('music', ['addHistory', 'addHistoryIndex'])
   },
   computed: {
-    ...mapState('music', ['name', 'list', 'history', 'historyIndex', 'musicApi', 'src'])
+    ...mapState('music', ['name', 'list', 'history', 'historyIndex', 'src']),
+    ...mapState('api', ['musicApi'])
   }
 }
 </script>

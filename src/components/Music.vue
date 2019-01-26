@@ -32,6 +32,7 @@ export default {
     this.$refs.audio.onended = () => {
       this.newMusic()
     }
+    this.$refs.audio.volume = 0.3
   },
   data () {
     return {
@@ -97,7 +98,7 @@ export default {
     getHistoryList () {
       this.historyList = ''
       this.history.forEach((item, index, array) => {
-        this.historyList += `${item}<br />`
+        this.historyList += `<p class="row-history">${item}</p>`
       })
       return this.historyList
     },

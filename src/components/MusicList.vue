@@ -30,7 +30,7 @@ import axios from 'axios'
 export default {
   created () {
     this.setLoading(true)
-    axios.get(this.apiAddress).then(response => {
+    axios.get('/music/list').then(response => {
       console.log(`歌曲数量：${response.data.length - 1}`)
       this.loadInit(response.data)
     }).catch(function (error) {
@@ -53,7 +53,7 @@ export default {
       const node = {
         current: row.name,
         name: row.name,
-        src: this.musicApi + row.name
+        src: `/CloudMusic/${row.name}`
       }
       this.addHistory(node)
     },
@@ -74,8 +74,7 @@ export default {
       'tableList',
       'loading',
       'loadMusicEvent'
-    ]),
-    ...mapState('api', ['musicApi', 'apiAddress'])
+    ])
   }
 }
 </script>

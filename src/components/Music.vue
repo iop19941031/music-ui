@@ -37,7 +37,8 @@ export default {
   data () {
     return {
       historyList: '',
-      playing: false
+      playing: false,
+      path: '/CloudMusic/'
     }
   },
   methods: {
@@ -47,7 +48,7 @@ export default {
       const node = {
         current: currentMusicName,
         name: currentMusicName,
-        src: this.musicApi + currentMusicName
+        src: this.path + currentMusicName
       }
       this.addHistory(node)
     },
@@ -58,7 +59,7 @@ export default {
         const music = {
           index: beforeIndex,
           name: this.history[beforeIndex],
-          src: this.musicApi + this.history[beforeIndex]
+          src: this.path + this.history[beforeIndex]
         }
         console.log(music.index + '------------' + music.name)
         this.addHistoryIndex(music)
@@ -74,7 +75,7 @@ export default {
           const music = {
             index: laterIndex,
             name: this.history[laterIndex],
-            src: this.musicApi + this.history[laterIndex]
+            src: this.path + this.history[laterIndex]
           }
           console.log(music.index + '------------' + music.name)
           this.addHistoryIndex(music)
@@ -111,8 +112,7 @@ export default {
     ...mapMutations('music', ['addHistory', 'addHistoryIndex'])
   },
   computed: {
-    ...mapState('music', ['name', 'list', 'history', 'historyIndex', 'src']),
-    ...mapState('api', ['musicApi'])
+    ...mapState('music', ['name', 'list', 'history', 'historyIndex', 'src'])
   }
 }
 </script>

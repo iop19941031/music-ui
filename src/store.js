@@ -3,14 +3,6 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-const api = {
-  namespaced: true,
-  state: {
-    apiAddress: 'http://localhost:3000/music/list',
-    musicApi: 'http://localhost:3000/CloudMusic/'
-  }
-}
-
 const music = {
   namespaced: true,
   state: {
@@ -86,7 +78,6 @@ const music = {
         state.showListIndex = 100
         state.loadMusicEvent = true
       }
-      console.log(`当前显示音乐数量:${state.showListIndex}`)
     },
     setLoading (state, value) {
       state.loading = value
@@ -107,7 +98,6 @@ const music = {
 export default new Vuex.Store({
   strict: true,
   modules: {
-    music,
-    api
+    music
   }
 })

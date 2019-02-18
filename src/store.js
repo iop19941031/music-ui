@@ -56,13 +56,13 @@ const music = {
     },
     loadInit (state, responseData) {
       state.list = []
+      function MusicData (id, name) {
+        this.id = id
+        this.name = name
+      }
       const musicNum = responseData.length - 1
       for (let i = 1; i < responseData.length; i++) {
-        let data = {
-          id: i,
-          name: responseData[i]
-        }
-        state.list.push(data)
+        state.list.push(new MusicData(i, responseData[i]))
         state.loading = false
       }
       state.tableList = []

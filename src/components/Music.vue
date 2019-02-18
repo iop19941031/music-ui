@@ -45,22 +45,24 @@ export default {
     // 播放新的歌曲
     newMusic () {
       const currentMusicName = this.list[Math.floor(Math.random() * (2585 - 1)) + 1].name
-      const node = {
-        current: currentMusicName,
-        name: currentMusicName,
-        src: this.path + currentMusicName
-      }
+
+      const node = Object.create(null)
+      node.current = currentMusicName
+      node.name = currentMusicName
+      node.src = this.path + currentMusicName
+
       this.addHistory(node)
     },
     // 上一首歌功能
     beforeButton () {
       if (this.historyIndex < (this.history.length - 1)) {
         const beforeIndex = this.historyIndex + 1
-        const music = {
-          index: beforeIndex,
-          name: this.history[beforeIndex],
-          src: this.path + this.history[beforeIndex]
-        }
+
+        const music = Object.create(null)
+        music.index = beforeIndex
+        music.name = this.history[beforeIndex]
+        music.src = this.path + this.history[beforeIndex]
+
         console.log(music.index + '------------' + music.name)
         this.addHistoryIndex(music)
       } else {
@@ -72,11 +74,12 @@ export default {
       if (this.list.length !== 0) {
         if (this.historyIndex !== 0) {
           const laterIndex = this.historyIndex - 1
-          const music = {
-            index: laterIndex,
-            name: this.history[laterIndex],
-            src: this.path + this.history[laterIndex]
-          }
+
+          const music = Object.create(null)
+          music.index = laterIndex
+          music.name = this.history[laterIndex]
+          music.src = this.path + this.history[laterIndex]
+
           console.log(music.index + '------------' + music.name)
           this.addHistoryIndex(music)
         } else {
@@ -119,4 +122,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.music{
+  background: red;
+}
 </style>

@@ -3,18 +3,68 @@ Write your variables here. All available variables can be
 found in element-ui/packages/theme-chalk/src/common/var.scss.
 For example, to overwrite the theme color:
 */
-$--color-primary: teal;
+$--color-primary: #606266db;
 
 /* icon font path, required */
 $--font-path: '~element-ui/lib/theme-chalk/fonts';
 
 @import "~element-ui/packages/theme-chalk/src/index";
 
-.history {
-    overflow-y: scroll;
-    max-height: 800px;
-    max-width: 800px;
-    .row-history:hover {
-        background: #90939947;
+.overall {
+    border: 1px solid #eee;
+    margin-bottom: 300px;
+    .main{
+        padding: 0px !important;
+        td.play {
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 20px;
+            background-image:url('./assets/undertint_play.png');
+        }
+        td.play:hover {
+            cursor:pointer;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 20px;
+            background-image:url('./assets/dark_play.png');
+        }
+        .table-header th{
+            background: #82848a08;
+            border-bottom: 1px solid #30313347 !important;
+        }
+        /* 点击事件*/
+        // .playing {
+        //     cursor:pointer;
+        //     background-position: center;
+        //     background-repeat: no-repeat;
+        //     background-size: 20px;
+        //     background-image:url('./assets/red_play.png');
+        // }
+    }
+    .footer {
+        border-top: 1px solid #90939945;
+        position: fixed;
+        bottom: 100px;
+        .history {
+            overflow-y: scroll;
+            max-height: 800px;
+            max-width: 800px;
+            .row-history:hover {
+                background: #90939947;
+            }
+        }
     }
 }
+.top {
+    border-radius: 64px !important;
+    padding: 13px !important;
+    position: fixed;
+    bottom: 250px;
+    right: 70px;
+}
+
+
+
+
+
+

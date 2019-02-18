@@ -1,14 +1,20 @@
 <template>
-  <div>
+  <div class="list">
     <el-table
       v-loading="loading"
       :data="tableList"
       style="width: 100%"
-      @row-click="rowClickEvent">
+      @cell-click="columnClickEvent"
+      header-row-class-name="table-header">
       <el-table-column
         prop="id"
-        label="序号"
-        width="180">
+        label=""
+        width="80">
+      </el-table-column>
+      <el-table-column
+        class-name="play"
+        label=""
+        width="40">
       </el-table-column>
       <el-table-column
         prop="name"
@@ -20,6 +26,7 @@
       @click="load">
       点击加载更多音乐
     </p>
+    <!-- <img src="@/assets/undertint_play.png"> -->
   </div>
 </template>
 
@@ -38,6 +45,15 @@ export default {
     })
   },
   methods: {
+    columnClickEvent (row, column, cell, event) {
+      if (column.id === 'el-table_1_column_2') {
+        const node = Object.create(null)
+        node.current = row.name
+        node.name = row.name
+        node.src = `/CloudMusic/${row.name}`
+        this.addHistory(node)
+      }
+    },
     load () {
       const residueMusic = this.list.length - this.showListIndex
       console.log(`剩余数量:${residueMusic}`)
@@ -48,14 +64,6 @@ export default {
         this.loadSufficient()
       }
       console.log(`当前显示音乐数量:${this.showListIndex}`)
-    },
-    rowClickEvent (row, event, column) {
-      const node = {
-        current: row.name,
-        name: row.name,
-        src: `/CloudMusic/${row.name}`
-      }
-      this.addHistory(node)
     },
     ...mapMutations('music', [
       'addHistory',

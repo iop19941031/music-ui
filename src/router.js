@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
-import Music from './components/Music.vue'
 
 Vue.use(Router)
 
@@ -13,8 +11,8 @@ export default new Router({
       path: '/',
       name: 'home',
       components: {
-        main: Home,
-        bottom: Music
+        main: () => import(/* webpackChunkName: "login" */ './views/Home.vue'),
+        bottom: () => import(/* webpackChunkName: "login" */ './components/Music.vue')
       }
     }
     // {

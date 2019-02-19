@@ -52,6 +52,7 @@ export default {
         node.name = row.name
         node.src = `/CloudMusic/${row.name}`
         this.addHistory(node)
+        this.changePlaying(true)
       }
     },
     load () {
@@ -71,7 +72,8 @@ export default {
       'loadSufficient',
       'loadInit',
       'setLoading',
-      'setLoadMusicEvent'
+      'setLoadMusicEvent',
+      'changePlaying'
     ])
   },
   computed: {

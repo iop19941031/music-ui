@@ -62,7 +62,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #f2f6fc;
   background: #60626612;
   .footer {
     border-top: 1px solid #90939945;

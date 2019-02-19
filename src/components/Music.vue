@@ -1,10 +1,8 @@
 <template>
-  <div :class="{show : musicShow, music: lockStatus}">
+  <div class="music-play" :class="{show : musicShow, music: lockStatus}">
     <el-row>
       <el-col class="lock" :offset="21" :span="2" >
-        <svg class="icon" width="10px" height="10px" viewBox="0 0 1024 1024" @click="lockEvent" >
-          <path fill="#bfbfbf" :d="lock" />
-        </svg>
+        <span :class="{lock_status : lockStatus, unlock_status : !lockStatus  }" @click="lockEvent">&ensp;&ensp;</span>
       </el-col>
       <el-col :span="24">
         <h3>{{name}}</h3>
@@ -19,14 +17,18 @@
           <!-- <source src="../../music/1.mp3"  type="audio/mpeg"> -->
         </audio>
         <br />
-        <el-button type="info" @click="beforeButton" icon="el-icon-arrow-left" size="medium" circle></el-button>
-        <el-button type="info" @click="onPlay" icon="el-icon-caret-right" circle></el-button>
-        <el-button type="info" @click="laterButton" icon="el-icon-arrow-right" size="medium" circle></el-button>
-        <el-tooltip content="播放历史" placement="right" :open-delay=500>
+        <button class="music-button before" @click="beforeButton">&ensp;&ensp;</button>
+        <button class="music-button" :class="{ready_play: !playing, playing: playing}" @click="onPlay" >&ensp;&ensp;</button>
+        <button class="music-button later" @click="laterButton" circle>&ensp;&ensp;</button>
+        <!-- <el-tooltip content="播放历史" placement="right" :open-delay=500>
           <el-badge :value="history.length" class="item">
             <el-button type="info" @click="alertQueryHistory" icon="el-icon-service" circle></el-button>
           </el-badge>
-        </el-tooltip>
+        </el-tooltip> -->
+        <el-badge :value="history.length" class="item">
+            <!-- <button class="history"  circle>&ensp;&ensp;</button> -->
+            <el-button class="history" @click="alertQueryHistory" type="primary">&ensp;&ensp;</el-button>
+        </el-badge>
       </el-col>
 
     </el-row>
@@ -47,23 +49,18 @@ export default {
   data () {
     return {
       musicShow: false,
-      lock: 'M768.25422 0q48.810328 0 94.061569 18.303873t80.333664 50.33565 56.436941 74.740814 21.354518 91.519364l0 150.49851-123.042701 0 0-122.025819q0-64.063555-36.099305-99.654419t-97.112214-35.590864q-54.911619 0-88.468719 35.590864t-33.5571 99.654419l0 124.059583-128.12711 0 0-152.532274q0-48.810328 19.320755-91.519364t53.386296-74.740814 80.333664-50.33565 101.179742-18.303873zM766.220457 693.513406l0 87.451837 0 47.793446q0 27.455809-9.660377 51.860973t-26.438928 41.692155-39.658391 27.455809-50.33565 10.168818l-514.542205 0q-27.455809 0-49.82721-9.660377t-38.641509-26.438928-24.913605-39.14995-8.643496-47.793446l0-323.368421q0-28.472691 19.829196-47.793446t46.268123-19.320755l629.449851 0q28.472691 0 47.793446 19.320755t19.320755 47.793446l0 179.988083z',
       lockStatus: true,
       historyList: '',
-      playing: false,
       path: '/CloudMusic/',
-      musicMaxNum: 2585// 随机的歌曲数量
+      musicMaxNum: 99// 随机的歌曲数量
     }
   },
   methods: {
     lockEvent () {
       if (this.lockStatus) {
-        this.lock = 'M385.150849 385.662338l-128.895105 0 0-150.377622q0-49.102897 19.436563-91.556444t53.706294-74.677323 80.815185-50.637363 101.786214-18.413586q49.102897 0 94.625375 18.413586t80.815185 50.637363 56.263736 74.677323 20.971029 91.556444l0 150.377622-123.78022 0 0-121.734266q0-64.447552-35.804196-99.74026t-97.182817-35.292707q-55.240759 0-88.999001 35.292707t-33.758242 99.74026l0 121.734266zM826.053946 447.040959q27.62038 0 47.568432 19.948052t19.948052 47.568432l0 317.122877q0 27.62038-9.718282 51.66034t-26.597403 41.942058-39.896104 28.131868-50.637363 10.22977l-516.603397 0q-27.62038 0-50.125874-10.22977t-38.361638-27.108891-24.551449-39.384615-8.695305-48.07992l0-324.283716q0-27.62038 19.436563-47.568432t47.056943-19.948052l61.378621 0 128.895105 0 255.744256 0 123.78022 0 61.378621 0z'
         this.lockStatus = false
         this.musicShow = true
       } else {
-        this.lock = 'M768.25422 0q48.810328 0 94.061569 18.303873t80.333664 50.33565 56.436941 74.740814 21.354518 91.519364l0 150.49851-123.042701 0 0-122.025819q0-64.063555-36.099305-99.654419t-97.112214-35.590864q-54.911619 0-88.468719 35.590864t-33.5571 99.654419l0 124.059583-128.12711 0 0-152.532274q0-48.810328 19.320755-91.519364t53.386296-74.740814 80.333664-50.33565 101.179742-18.303873zM766.220457 693.513406l0 87.451837 0 47.793446q0 27.455809-9.660377 51.860973t-26.438928 41.692155-39.658391 27.455809-50.33565 10.168818l-514.542205 0q-27.455809 0-49.82721-9.660377t-38.641509-26.438928-24.913605-39.14995-8.643496-47.793446l0-323.368421q0-28.472691 19.829196-47.793446t46.268123-19.320755l629.449851 0q28.472691 0 47.793446 19.320755t19.320755 47.793446l0 179.988083z'
-
         this.lockStatus = true
         this.musicShow = false
       }
@@ -132,59 +129,117 @@ export default {
       })
       return this.historyList
     },
-    play () {
-      this.$refs.audio.play()
-    },
     onPlay () {
-      this.$refs.audio.pause()
+      if (this.playing) {
+        this.$refs.audio.pause()
+        this.changePlaying(false)
+      } else {
+        this.$refs.audio.play()
+        this.changePlaying(true)
+      }
     },
-    ...mapMutations('music', ['addHistory', 'addHistoryIndex'])
+    ...mapMutations('music', ['addHistory', 'addHistoryIndex', 'changePlaying'])
   },
   computed: {
-    ...mapState('music', ['name', 'list', 'history', 'historyIndex', 'src'])
+    ...mapState('music', ['name', 'list', 'history', 'historyIndex', 'src', 'playing'])
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-.music{
-  bottom: -159px;
+<style  lang="scss">
+// box-shadow: 0px 0px 0px 1px #f2f6fc;
+.music-play{
   border-color: #ff000000 !important;
   div {
     div{
-      background: #303133;
+      background: #303133f5;
     }
     .lock{
       height: 14px;
       border-bottom: 14px solid #303133;
       border-left: 9px solid #f4f4f4 !important;
       border-right: 9px solid #f4f4f4;
+      .lock_status {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 11px;
+        background-image: url('../assets/dark_unlock.png') ;
+        cursor:pointer;
+      }
+      .lock_status:hover {
+        background-image: url('../assets/undertint_unlock.png');
+      }
+      .unlock_status {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 11px;
+        background-image: url('../assets/dark_lock.png') ;
+        cursor:pointer;
+      }
+      .unlock_status:hover {
+        background-image: url('../assets/undertint_lock.png') ;
+      }
+    }
+    .music-button {
+      background-color: black;
+      border: 2px solid white;
+      background-size: 14px;
+      background-repeat: no-repeat;
+      background-position: center;
+      border-radius: 19px;
+      height: 30px;
+      width: 30px;
+      margin: 0px 8px;
+    }
+    .music-button:hover {
+      box-shadow: 0px 0px 0px 1px #f2f6fc;
+    }
+    .before{
+      background-image: url('../assets/before.png') ;
+    }
+    .later {
+      background-image: url('../assets/later.png') ;
+    }
+    .ready_play, .playing {
+      background-size: 24px;
+      border-radius: 22px;
+      height: 40px;
+      width: 40px;
+    }
+    .ready_play {
+      background-image: url('../assets/ready-play.png') ;
+    }
+    .playing {
+      background-image: url('../assets/pause.png') ;
+    }
+    .history {
+      background-image: url(/img/history.2900a25e.png);
+      border: 1px solid white;
+      background-color: black;
+      background-position: center;
+      border-radius: 8px;
+      background-repeat: no-repeat;
+      background-size: 21px;
+      height: 32px;
+      width: 31px;
+      padding: 0px;
+    }
+    .history:hover {
+      box-shadow: 0px 0px 0px 1px #f2f6fc;
     }
   }
 }
+.music{
+  bottom: -159px;
+}
 .show{
-  border-color: #ff000000 !important;
-  bottom: 0px!important;
-  div {
-    div{
-      background: #303133;
-    }
-    .lock{
-      height: 14px;
-      border-bottom: 14px solid #303133;
-      border-left: 9px solid #f4f4f4 !important;
-      border-right: 9px solid #f4f4f4;
-    }
-  }
+  bottom: 0px ;
 }
 .music:hover{
   animation:myfirst 1s;
   -webkit-animation:myfirst 1s; /* Safari and Chrome */
   bottom: 0px;
-  svg{
-    cursor:pointer;
-  }
 }
 @keyframes myfirst{
 0% {bottom: -60px;}

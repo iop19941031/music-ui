@@ -14,9 +14,13 @@ const music = {
     showListIndex: 0,
     list: [],
     loading: false,
-    loadMusicEvent: false
+    loadMusicEvent: false,
+    playing: false
   },
   mutations: {
+    changePlaying (state, playing) {
+      state.playing = playing
+    },
     setSrc (state, src) {
       state.src = src
     },

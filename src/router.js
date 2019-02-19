@@ -11,7 +11,7 @@ export default new Router({
       path: '/',
       name: 'home',
       components: {
-        main: () => import(/* webpackChunkName: "login" */ './views/Home.vue'),
+        main: () => import(/* webpackChunkName: "login" */ './components/MusicList.vue'),
         bottom: () => import(/* webpackChunkName: "login" */ './components/Music.vue')
       }
     }

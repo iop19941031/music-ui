@@ -4,6 +4,9 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div> -->
+    <div class="father">
+        <div class="son"></div>
+    </div>
     <el-row>
       <el-col :span="18" :offset="3">
         <el-container class="overall">
@@ -14,13 +17,14 @@
             <el-main class="main">
               <router-view name="main" />
             </el-main>
-            <el-footer class="footer">
-              <router-view name="bottom" class="bottom"/>
-            </el-footer>
+            <!-- <el-footer>
+
+            </el-footer> -->
           </el-container>
         </el-container>
       </el-col>
     </el-row>
+    <router-view name="bottom" class="footer"/>
     <el-button class="top" round v-show="top"  @click="toTop"><i class="el-icon-arrow-up"></i></el-button>
   </div>
 </template>
@@ -60,5 +64,19 @@ export default {
   text-align: center;
   color: #2c3e50;
   background: #60626612;
+  .footer {
+    border-top: 1px solid #90939945;
+    position: fixed;
+    width: 100%;
+    .history {
+        overflow-y: scroll;
+        max-height: 800px;
+        max-width: 800px;
+        .row-history:hover {
+            background: #90939947;
+        }
+    }
+  }
 }
+
 </style>

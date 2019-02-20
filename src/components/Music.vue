@@ -7,10 +7,10 @@
       <el-col :span="24">
         <div class="original-music-controls">
           <h3>{{name}}</h3>
-          <el-col :span="1" :offset="4">
+          <!-- <el-col :span="1" :offset="4">
             <button class="music-button before" @click="beforeButton">&ensp;&ensp;</button>
-          </el-col>
-          <el-col :span="12">
+          </el-col> -->
+          <el-col :offset="5" :span="12">
             <audio
               autoplay
               controls="controls"
@@ -25,18 +25,18 @@
           <el-col :span="1">
             <button class="music-button later" @click="laterButton" circle>&ensp;&ensp;</button>
           </el-col>
-          
+
         </div>
       </el-col>
       <!-- <div class="music-controls">
         <el-col :span="2">
-          
+
         </el-col>
         <el-col :span="2">
           <button class="music-button" :class="{ready_play: !playing, playing: playing}" @click="onPlay" >&ensp;&ensp;</button>
         </el-col>
         <el-col :span="2">
-         
+
         </el-col>
         <el-col :span="6">
           <h5>{{name}}</h5>
@@ -48,17 +48,16 @@
           <el-col :span="17">
             <el-progress :percentage="70" :show-text="false"  color="#8e71c7"></el-progress>
           </el-col>
-          
-          
+
         </el-col>
         <el-col :span="2">
               <el-badge :value="history.length" class="item">
-              <button class="history"  circle>&ensp;&ensp;</button> 
+              <button class="history"  circle>&ensp;&ensp;</button>
               <el-button class="history" @click="alertQueryHistory" type="primary">&ensp;&ensp;</el-button>
           </el-badge>
         </el-col>
       </div> -->
-      
+
     </el-row>
   </div>
 </template>
@@ -80,7 +79,7 @@ export default {
       lockStatus: true,
       historyList: '',
       path: '/CloudMusic/',
-      musicMaxNum: 99// 随机的歌曲数量
+      musicMaxNum: 40// 随机的歌曲数量
     }
   },
   methods: {
@@ -97,7 +96,7 @@ export default {
     newMusic () {
       const randomID = Math.floor(Math.random() * (this.musicMaxNum - 1)) + 1
       const currentMusicName = this.list[randomID].name
-      this.setMusicID(randomID+1)
+      this.setMusicID(randomID + 1)
 
       this.changePlaying(true)
 
@@ -117,7 +116,6 @@ export default {
 
         this.setMusicID(beforeIndex)
 
-
         const music = Object.create(null)
         music.index = beforeIndex
         music.name = this.history[beforeIndex]
@@ -136,7 +134,7 @@ export default {
           const laterIndex = this.historyIndex - 1
 
           this.setMusicID(laterIndex)
-          
+
           const music = Object.create(null)
           music.index = laterIndex
           music.name = this.history[laterIndex]
@@ -152,35 +150,42 @@ export default {
       }
     },
     // 查询历史
-    alertQueryHistory () {
-      this.$alert(this.getHistoryList(), '播放历史', {
-        showConfirmButton: false,
-        closeOnPressEscape: true,
-        dangerouslyUseHTMLString: true,
-        customClass: 'history',
-        callback: () => {}
-      })
-    },
-    getHistoryList () {
-      this.historyList = ''
-      this.history.forEach((item, index, array) => {
-        this.historyList += `<p class="row-history">${item}</p>`
-      })
-      return this.historyList
-    },
-    onPlay () {
-      if (this.playing) {
-        this.$refs.audio.pause()
-        this.changePlaying(false)
-      } else {
-        this.$refs.audio.play()
-        this.changePlaying(true)
-      }
-    },
+    // alertQueryHistory () {
+    //   this.$alert(this.getHistoryList(), '播放历史', {
+    //     showConfirmButton: false,
+    //     closeOnPressEscape: true,
+    //     dangerouslyUseHTMLString: true,
+    //     customClass: 'history',
+    //     callback: () => {}
+    //   })
+    // },
+    // getHistoryList () {
+    //   this.historyList = ''
+    //   this.history.forEach((item, index, array) => {
+    //     this.historyList += `<p class="row-history">${item}</p>`
+    //   })
+    //   return this.historyList
+    // },
+    // onPlay () {
+    //   if (this.playing) {
+    //     this.$refs.audio.pause()
+    //     this.changePlaying(false)
+    //   } else {
+    //     this.$refs.audio.play()
+    //     this.changePlaying(true)
+    //   }
+    // },
     ...mapMutations('music', ['addHistory', 'addHistoryIndex', 'changePlaying', 'setMusicID'])
   },
   computed: {
-    ...mapState('music', ['name', 'list', 'history', 'historyIndex', 'src', 'playing', 'currentMusicID', 'beforeMusicID'])
+    ...mapState('music', ['name',
+      'list',
+      'history',
+      'historyIndex',
+      'src',
+      // 'playing',
+      'currentMusicID',
+      'beforeMusicID'])
   }
 }
 </script>
@@ -276,7 +281,7 @@ export default {
         background-image: url('../assets/lock/undertint_lock.png') ;
       }
     }
-    
+
   }
 }
 .music{

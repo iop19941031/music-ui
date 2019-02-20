@@ -2,7 +2,7 @@
   <div class="list">
     <el-table
       v-loading="loading"
-      :data="tableList"
+      :data="list"
       style="width: 100%"
       @cell-click="columnClickEvent"
       header-row-class-name="table-header">
@@ -21,11 +21,6 @@
         label="歌名">
       </el-table-column>
     </el-table>
-    <p class="load-music"
-      v-show="loadMusicEvent"
-      @click="load">
-      点击加载更多音乐
-    </p>
   </div>
 </template>
 
@@ -45,7 +40,7 @@ export default {
   methods: {
     columnClickEvent (row, column, cell, event) {
       // console.log(row.id)
-      
+
       if (column.id === 'el-table_1_column_2') {
         this.setMusicID(row.id)
         const node = Object.create(null)
@@ -56,45 +51,27 @@ export default {
         this.changePlaying(true)
       }
     },
-    load () {
-      const residueMusic = this.list.length - this.showListIndex
-      console.log(`剩余数量:${residueMusic}`)
-      if (residueMusic < 100) {
-        this.loadInsufficient(residueMusic)
-        this.setLoadMusicEvent(false)
-      } else {
-        this.loadSufficient()
-      }
-      console.log(`当前显示音乐数量:${this.showListIndex}`)
-    },
     ...mapMutations('music', [
       'addHistory',
-      'loadInsufficient',
-      'loadSufficient',
       'loadInit',
       'setLoading',
-      'setLoadMusicEvent',
       'changePlaying',
       'setMusicID'
     ])
   },
   watch: {
-    currentMusicID() {
-      document.querySelectorAll(".play")[this.beforeMusicID].classList.remove('clickPlay')
-      document.querySelectorAll(".play")[this.currentMusicID].classList.add('clickPlay')
+    currentMusicID () {
+      document.querySelectorAll('.play')[this.beforeMusicID].classList.remove('clickPlay')
+      document.querySelectorAll('.play')[this.currentMusicID].classList.add('clickPlay')
     }
   },
   computed: {
     ...mapState('music', [
       'name',
       'list',
-      'showListIndex',
-      'tableList',
       'loading',
-      'loadMusicEvent',
       'currentMusicID',
-      'beforeMusicID',
-      'playing'
+      'beforeMusicID'
     ])
   }
 }

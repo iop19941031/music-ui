@@ -12,11 +12,8 @@ const music = {
     currentMusicID: 0,
     beforeMusicID: 0,
     name: '无播放音乐',
-    tableList: [],
-    showListIndex: 0,
     list: [],
     loading: false,
-    loadMusicEvent: false,
     playing: false
   },
   mutations: {
@@ -46,54 +43,19 @@ const music = {
     setList (state, list) {
       state.list = list
     },
-    setShowListIndex (state, index) {
-      state.showListIndex = index
-    },
-    setTableList (state, list) {
-      state.tableList = list
-    },
-    loadInsufficient (state, residue) {
-      for (let i = 0 + state.showListIndex; i < (residue + state.showListIndex); ++i) {
-        state.tableList.push(state.list[i])
-      }
-      state.showListIndex = state.list.length
-    },
-    loadSufficient (state) {
-      state.showListIndex = state.showListIndex + 100
-      for (let i = state.showListIndex - 100; i <= state.showListIndex; ++i) {
-        state.tableList.push(state.list[i])
-      }
-    },
     loadInit (state, responseData) {
       state.list = []
       function MusicData (id, name) {
         this.id = id
         this.name = name
       }
-      const musicNum = responseData.length - 1
       for (let i = 1; i < responseData.length; i++) {
         state.list.push(new MusicData(i, responseData[i]))
         state.loading = false
       }
-      state.tableList = []
-      if (musicNum < 100) {
-        for (let i = 0; i <= musicNum; ++i) {
-          state.tableList.push(state.list[i])
-        }
-        state.showListIndex = musicNum
-      } else {
-        for (let i = 0; i < 100; ++i) {
-          state.tableList.push(state.list[i])
-        }
-        state.showListIndex = 100
-        state.loadMusicEvent = true
-      }
     },
     setLoading (state, value) {
       state.loading = value
-    },
-    setLoadMusicEvent (state, value) {
-      state.loadMusicEvent = value
     }
   },
   getters: {

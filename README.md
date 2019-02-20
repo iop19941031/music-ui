@@ -2,7 +2,7 @@
 
 dome：http://120.78.54.234:5000/ 
 
-需要开启服务器端获取音乐文件数据，详情：https://github.com/iop19941031/music-server
+需要开启服务器端获取音乐文件数据，详情：https://github.com/iop19941031/music-server （服务器宽带过小，音乐文件过大，加载会慢）
 
 已实现功能：
   1、播放歌曲的定位

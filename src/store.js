@@ -9,6 +9,8 @@ const music = {
     src: '',
     history: [],
     historyIndex: 0,
+    currentMusicID: 0,
+    beforeMusicID: 0,
     name: '无播放音乐',
     tableList: [],
     showListIndex: 0,
@@ -18,6 +20,10 @@ const music = {
     playing: false
   },
   mutations: {
+    setMusicID (state, id) {
+      state.beforeMusicID = state.currentMusicID
+      state.currentMusicID = id
+    },
     changePlaying (state, playing) {
       state.playing = playing
     },

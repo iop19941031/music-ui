@@ -26,12 +26,10 @@
       @click="load">
       点击加载更多音乐
     </p>
-    <!-- <img src="@/assets/undertint_play.png"> -->
   </div>
 </template>
 
 <script>
-// import { mapState } from 'vuex'
 import { mapState, mapMutations } from 'vuex'
 import axios from 'axios'
 export default {
@@ -46,7 +44,10 @@ export default {
   },
   methods: {
     columnClickEvent (row, column, cell, event) {
+      // console.log(row.id)
+      
       if (column.id === 'el-table_1_column_2') {
+        this.setMusicID(row.id)
         const node = Object.create(null)
         node.current = row.name
         node.name = row.name
@@ -73,8 +74,15 @@ export default {
       'loadInit',
       'setLoading',
       'setLoadMusicEvent',
-      'changePlaying'
+      'changePlaying',
+      'setMusicID'
     ])
+  },
+  watch: {
+    currentMusicID() {
+      document.querySelectorAll(".play")[this.beforeMusicID].classList.remove('clickPlay')
+      document.querySelectorAll(".play")[this.currentMusicID].classList.add('clickPlay')
+    }
   },
   computed: {
     ...mapState('music', [
@@ -83,7 +91,10 @@ export default {
       'showListIndex',
       'tableList',
       'loading',
-      'loadMusicEvent'
+      'loadMusicEvent',
+      'currentMusicID',
+      'beforeMusicID',
+      'playing'
     ])
   }
 }
@@ -91,11 +102,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+
 .load-music {
   font-size: 14px;
   color: #303133c9;
 }
 .load-music:hover {
   color: red;
+  cursor:pointer;
 }
 </style>

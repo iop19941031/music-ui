@@ -68,14 +68,14 @@ export default {
     border-top: 1px solid #90939945;
     position: fixed;
     width: 100%;
-    .history {
-        overflow-y: scroll;
-        max-height: 800px;
-        max-width: 800px;
-        .row-history:hover {
-            background: #90939947;
-        }
-    }
+    // .history {
+    //     overflow-y: scroll;
+    //     max-height: 800px;
+    //     max-width: 800px;
+    //     .row-history:hover {
+    //         background: #90939947;
+    //     }
+    // }
   }
 }
 

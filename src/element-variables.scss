@@ -12,25 +12,28 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
 
 .overall {
     border: 1px solid #eee;
-    margin-bottom: 300px;
+    margin-bottom: 50px;
     .main{
         padding: 0px !important;
         td.play {
             background-position: center;
             background-repeat: no-repeat;
             background-size: 20px;
-            background-image:url('./assets/undertint_play.png');
+            background-image:url('./assets/list/undertint_play.png');
         }
         td.play:hover {
             cursor:pointer;
             background-position: center;
             background-repeat: no-repeat;
             background-size: 20px;
-            background-image:url('./assets/dark_play.png');
+            background-image:url('./assets/list/dark_play.png');
         }
         .table-header th{
             background: #82848a08;
             border-bottom: 1px solid #30313347 !important;
+        }
+        .clickPlay {
+            background-image:url('./assets/list/red_play.png') !important;
         }
         /* 点击事件*/
         // .playing {
@@ -38,7 +41,7 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
         //     background-position: center;
         //     background-repeat: no-repeat;
         //     background-size: 20px;
-        //     background-image:url('./assets/red_play.png');
+        //     background-image:url('./assets/list/red_play.png');
         // }
     }
     

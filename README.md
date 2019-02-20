@@ -1,34 +1,15 @@
-# music-ui
+本项目采用了vue+vuex+vue-router+element-ui开发，使用了axios获取数据，使用了H5的audio控件
 
-## Project setup
-```
-npm install
-```
+需要开启服务器端获取音乐文件数据，详情：https://github.com/iop19941031/music-server
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+已实现功能：
+  1、播放歌曲的定位
+  2、下一首歌功能，上一首功能（存在BUG，封存代码中）
+  3、播放器隐藏功能
+  4、控制音乐播放、暂停组件（封存代码中）
+  5、随机播放功能，其余播放功能待开发
+  6、音乐播放历史功能（未完成，封存代码中）
+  7、控制音量组件（未开发）
+  8、控制音乐进度组件（未开发）
+  9、音乐分类（未开发）
+  

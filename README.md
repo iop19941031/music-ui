@@ -1,5 +1,7 @@
 本项目采用了vue+vuex+vue-router+element-ui开发，使用了axios获取数据，使用了H5的audio控件
 
+dome：http://120.78.54.234:5000/ 
+
 需要开启服务器端获取音乐文件数据，详情：https://github.com/iop19941031/music-server
 
 已实现功能：

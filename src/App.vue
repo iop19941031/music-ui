@@ -25,32 +25,41 @@
       </el-col>
     </el-row>
     <router-view name="bottom" class="footer"/>
-    <el-button class="top" round v-show="top"  @click="toTop"><i class="el-icon-arrow-up"></i></el-button>
+    <el-button class="top" round v-show="topShow" @click="toTop" icon="el-icon-arrow-up" circle></el-button>
   </div>
 </template>
 
 <script>
+import Vue from 'vue'
+import { Row, Col, Container, Main, Button} from 'element-ui';
+Vue.use(Row);
+Vue.use(Col);
+Vue.use(Container);
+Vue.use(Main);
+Vue.use(Button);
+Vue.prototype.myWindow = window
 export default {
   mounted () {
     // 监听滚动条
-    window.addEventListener('scroll', this.handleScroll)
+    this.myWindow.addEventListener('scroll', this.handleScroll)
   },
   data () {
     return {
-      top: false
+      topShow: false
     }
   },
   methods: {
     handleScroll () {
-      if (scrollY === 0) {
-        this.top = false
+      if (this.myWindow.scrollY === 0) {
+        this.topShow = false
       } else {
-        this.top = true
+        this.topShow = true
       }
     },
     toTop () {
-      this.top = false
-      window.scrollTo(0, 0)
+      // console.log(this.myWindow.scrollY)
+      this.topShow = false
+      this.myWindow.scrollTo(0, 0)
     }
   }
 }
@@ -64,6 +73,13 @@ export default {
   text-align: center;
   color: #f2f6fc;
   background: #60626612;
+  .top {
+    border-radius: 64px !important;
+    padding: 13px !important;
+    position: fixed;
+    bottom: 200px;
+    right: 70px;
+  }
   .footer {
     border-top: 1px solid #90939945;
     position: fixed;

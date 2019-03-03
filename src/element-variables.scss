@@ -20,17 +20,19 @@ For example, to overwrite the theme color:
             background-repeat: no-repeat;
             background-size: 20px;
             background-image:url('./assets/list/undertint_play.png');
+            &:hover {
+                cursor:pointer;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: 20px;
+                background-image:url('./assets/list/dark_play.png');
+            }
         }
-        td.play:hover {
-            cursor:pointer;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: 20px;
-            background-image:url('./assets/list/dark_play.png');
-        }
-        .table-header th{
-            background: #82848a08;
-            border-bottom: 1px solid #30313347 !important;
+        .table-header{
+            th {
+                background: #82848a08;
+                border-bottom: 1px solid #30313347;
+            }
         }
         .clickPlay {
             background-image:url('./assets/list/red_play.png') !important;

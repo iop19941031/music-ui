@@ -29,13 +29,18 @@ import { mapState, mapMutations } from 'vuex'
 import axios from 'axios'
 export default {
   created () {
-    this.setLoading(true)
     axios.get('/music/list').then(response => {
       console.log(`歌曲数量：${response.data.length - 1}`)
       this.loadInit(response.data)
+      this.loading = false
     }).catch(function (error) {
       console.log(error)
     })
+  },
+  data () {
+    return {
+      loading: true
+    }
   },
   methods: {
     columnClickEvent (row, column, cell, event) {
@@ -54,13 +59,12 @@ export default {
     ...mapMutations('music', [
       'addHistory',
       'loadInit',
-      'setLoading',
       'changePlaying',
       'setMusicID'
     ])
   },
   watch: {
-    currentMusicID () {
+    name () {
       document.querySelectorAll('.play')[this.beforeMusicID].classList.remove('clickPlay')
       document.querySelectorAll('.play')[this.currentMusicID].classList.add('clickPlay')
     }
@@ -69,7 +73,6 @@ export default {
     ...mapState('music', [
       'name',
       'list',
-      'loading',
       'currentMusicID',
       'beforeMusicID'
     ])

@@ -15,7 +15,7 @@
 
             </el-header> -->
             <el-main class="main">
-              <router-view name="main" />
+              <MusicList />
             </el-main>
             <!-- <el-footer>
 
@@ -24,24 +24,24 @@
         </el-container>
       </el-col>
     </el-row>
-    <router-view name="bottom" class="footer"/>
+    <Music class="footer"/>
     <el-button class="top" round v-show="topShow" @click="toTop" icon="el-icon-arrow-up" circle></el-button>
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
-import { Row, Col, Container, Main, Button} from 'element-ui';
-Vue.use(Row);
-Vue.use(Col);
-Vue.use(Container);
-Vue.use(Main);
-Vue.use(Button);
+import Music from './components/Music.vue'
+import MusicList from './components/MusicList.vue'
 Vue.prototype.myWindow = window
 export default {
   mounted () {
     // 监听滚动条
     this.myWindow.addEventListener('scroll', this.handleScroll)
+  },
+  components: {
+    Music,
+    MusicList
   },
   data () {
     return {

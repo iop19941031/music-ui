@@ -8,7 +8,7 @@
         <div class="original-music-controls">
           <h3>{{name}}</h3>
           <!-- <el-col :span="1" :offset="4">
-            <button class="music-button before" @click="beforeButton">&ensp;&ensp;</button>
+            <button class="before" @click="beforeButton">&ensp;&ensp;</button>
           </el-col> -->
           <el-col :offset="5" :span="12">
             <audio
@@ -23,9 +23,8 @@
           </audio>
           </el-col>
           <el-col :span="1">
-            <button class="music-button later" @click="laterButton" circle>&ensp;&ensp;</button>
+            <button class="later" @click="laterButton" circle>&ensp;&ensp;</button>
           </el-col>
-
         </div>
       </el-col>
       <!-- <div class="music-controls">
@@ -43,7 +42,7 @@
         </el-col>
         <el-col :span="6">
           <el-col :span="5">
-            <button class="music-button volume" @click="laterButton" circle>&ensp;&ensp;</button>
+            <button class=" volume" @click="laterButton" circle>&ensp;&ensp;</button>
           </el-col>
           <el-col :span="17">
             <el-progress :percentage="70" :show-text="false"  color="#8e71c7"></el-progress>
@@ -84,13 +83,8 @@ export default {
   },
   methods: {
     lockEvent () {
-      if (this.lockStatus) {
-        this.lockStatus = false
-        this.musicShow = true
-      } else {
-        this.lockStatus = true
-        this.musicShow = false
-      }
+      this.lockStatus = !this.lockStatus
+      this.musicShow = !this.lockStatus
     },
     // 播放新的歌曲
     newMusic () {
@@ -122,7 +116,7 @@ export default {
         music.src = this.path + this.history[beforeIndex]
 
         // console.log(music.index + '------------' + music.name)
-        this.addHistoryIndex(music)
+        this.changeHistoryIndex(music)
       } else {
         console.log('前面没有播放记录')
       }
@@ -141,7 +135,7 @@ export default {
           music.src = this.path + this.history[laterIndex]
 
           // console.log(music.index + '------------' + music.name)
-          this.addHistoryIndex(music)
+          this.changeHistoryIndex(music)
         } else {
           this.newMusic()
         }
@@ -175,10 +169,11 @@ export default {
     //     this.changePlaying(true)
     //   }
     // },
-    ...mapMutations('music', ['addHistory', 'addHistoryIndex', 'changePlaying', 'setMusicID'])
+    ...mapMutations('music', ['addHistory', 'changeHistoryIndex', 'changePlaying', 'setMusicID'])
   },
   computed: {
-    ...mapState('music', ['name',
+    ...mapState('music', [
+      'name',
       'list',
       'history',
       'historyIndex',
@@ -186,35 +181,37 @@ export default {
       // 'playing',
       'currentMusicID',
       'beforeMusicID'])
+
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style  lang="scss">
+@mixin music-button($height: 30px, $width:30px, $radius: 19px) {
+  background-color: black;
+  border: 2px solid white;
+  background-size: 14px;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: $radius;
+  height: $height;
+  width: $width;
+  margin: 0px 8px;
+  &:hover {
+    box-shadow: 0px 0px 0px 1px #f2f6fc;
+  }
+}
 .music-play{
   z-index: 99;
   border-color: #ff000000 !important;
-  .music-button {
-      background-color: black;
-      border: 2px solid white;
-      background-size: 14px;
-      background-repeat: no-repeat;
-      background-position: center;
-      border-radius: 19px;
-      height: 30px;
-      width: 30px;
-      margin: 0px 8px;
-    }
-    .music-button:hover {
-      box-shadow: 0px 0px 0px 1px #f2f6fc;
-    }
-    .before{
-      background-image: url('../assets/player/before.png') ;
-    }
-    .later {
-      background-image: url('../assets/player/later.png') ;
-    }
+  // .before{
+  //   background-image: url('../assets/player/before.png') ;
+  // }
+  .later {
+    @include music-button;
+    background-image: url('../assets/player/later.png') ;
+  }
   // .music-controls{
   //   background: #303133f5;
   //   .ready_play, .playing {
@@ -266,9 +263,9 @@ export default {
         background-size: 11px;
         background-image: url('../assets/lock/dark_unlock.png') ;
         cursor:pointer;
-      }
-      .lock_status:hover {
-        background-image: url('../assets/lock/undertint_unlock.png');
+        &:hover {
+          background-image: url('../assets/lock/undertint_unlock.png');
+        }
       }
       .unlock_status {
         background-position: center;
@@ -276,9 +273,9 @@ export default {
         background-size: 11px;
         background-image: url('../assets/lock/dark_lock.png') ;
         cursor:pointer;
-      }
-      .unlock_status:hover {
-        background-image: url('../assets/lock/undertint_lock.png') ;
+        &:hover {
+          background-image: url('../assets/lock/undertint_lock.png') ;
+        }
       }
     }
 
@@ -286,13 +283,13 @@ export default {
 }
 .music{
   bottom: -122px;
+  &:hover {
+    animation:myfirst 1s;
+    -webkit-animation:myfirst 1s; /* Safari and Chrome */
+    bottom: 0px;
+  }
 }
 .show{
-  bottom: 0px ;
-}
-.music:hover{
-  animation:myfirst 1s;
-  -webkit-animation:myfirst 1s; /* Safari and Chrome */
   bottom: 0px;
 }
 @keyframes myfirst{

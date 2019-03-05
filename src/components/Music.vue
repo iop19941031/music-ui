@@ -7,33 +7,31 @@
       <el-col :span="24">
         <div class="original-music-controls">
           <h3>{{name}}</h3>
-          <!-- <el-col :span="1" :offset="4">
-            <button class="before" @click="beforeButton">&ensp;&ensp;</button>
-          </el-col> -->
+          
           <el-col :offset="5" :span="12">
             <audio
               autoplay
-              controls="controls"
               ref="audio"
               :src="src"
               type="audio/mpeg"
               preload="meta">
             Your browser does not support the <code>audio</code> element.
-            <!-- <source src="../../music/1.mp3"  type="audio/mpeg"> -->
+            
           </audio>
           </el-col>
-          <el-col :span="1">
-            <button class="later" @click="laterButton" circle>&ensp;&ensp;</button>
-          </el-col>
+          <button class="before" @click="beforeButton">&ensp;&ensp;</button>
+          <button :class="{ready_play: !playing, playing: playing}" @click="onPlay" >&ensp;&ensp;</button>
+          <button class="later" @click="laterButton" circle>&ensp;&ensp;</button>
+          <el-badge :value="12" class="item">
+              <button class="history" @click="alertQueryHistory"></button>
+            </el-badge>
         </div>
       </el-col>
       <!-- <div class="music-controls">
         <el-col :span="2">
 
         </el-col>
-        <el-col :span="2">
-          <button class="music-button" :class="{ready_play: !playing, playing: playing}" @click="onPlay" >&ensp;&ensp;</button>
-        </el-col>
+        
         <el-col :span="2">
 
         </el-col>
@@ -49,12 +47,7 @@
           </el-col>
 
         </el-col>
-        <el-col :span="2">
-              <el-badge :value="history.length" class="item">
-              <button class="history"  circle>&ensp;&ensp;</button>
-              <el-button class="history" @click="alertQueryHistory" type="primary">&ensp;&ensp;</el-button>
-          </el-badge>
-        </el-col>
+        
       </div> -->
 
     </el-row>
@@ -109,7 +102,7 @@ export default {
 
         this.changePlaying(true)
 
-        this.setMusicID(beforeIndex)
+        this.setMusicID(this.beforeMusicID)
 
         const music = Object.create(null)
         music.index = beforeIndex
@@ -119,7 +112,7 @@ export default {
         // console.log(music.index + '------------' + music.name)
         this.changeHistoryIndex(music)
       } else {
-        console.log('前面没有播放记录')
+        alert('前面没有播放记录')
       }
     },
     // 下一首歌功能
@@ -145,31 +138,31 @@ export default {
       }
     },
     // 查询历史
-    // alertQueryHistory () {
-    //   this.$alert(this.getHistoryList(), '播放历史', {
-    //     showConfirmButton: false,
-    //     closeOnPressEscape: true,
-    //     dangerouslyUseHTMLString: true,
-    //     customClass: 'history',
-    //     callback: () => {}
-    //   })
-    // },
-    // getHistoryList () {
-    //   this.historyList = ''
-    //   this.history.forEach((item, index, array) => {
-    //     this.historyList += `<p class="row-history">${item}</p>`
-    //   })
-    //   return this.historyList
-    // },
-    // onPlay () {
-    //   if (this.playing) {
-    //     this.$refs.audio.pause()
-    //     this.changePlaying(false)
-    //   } else {
-    //     this.$refs.audio.play()
-    //     this.changePlaying(true)
-    //   }
-    // },
+    alertQueryHistory () {
+      this.$alert(this.getHistoryList(), '播放历史', {
+        showConfirmButton: false,
+        closeOnPressEscape: true,
+        dangerouslyUseHTMLString: true,
+        customClass: 'history',
+        callback: () => {}
+      })
+    },
+    getHistoryList () {
+      this.historyList = ''
+      this.history.forEach((item, index, array) => {
+        this.historyList += `<p class="row-history">${item}</p>`
+      })
+      return this.historyList
+    },
+    onPlay () {
+      if (this.playing) {
+        this.$refs.audio.pause()
+        this.changePlaying(false)
+      } else {
+        this.$refs.audio.play()
+        this.changePlaying(true)
+      }
+    },
     ...mapMutations('music', ['addHistory', 'changeHistoryIndex', 'changePlaying', 'setMusicID'])
   },
   computed: {
@@ -179,8 +172,7 @@ export default {
       'history',
       'historyIndex',
       'src',
-      // 'playing',
-      'currentMusicID',
+      'playing',
       'beforeMusicID'])
 
   }
@@ -189,10 +181,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style  lang="scss">
-@mixin music-button($height: 30px, $width:30px, $radius: 19px) {
+@mixin music-button($height: 30px, $width:30px, $radius: 19px, $background-size: 14px) {
   background-color: black;
   border: 2px solid white;
-  background-size: 14px;
+  background-size: $background-size;
   background-repeat: no-repeat;
   background-position: center;
   border-radius: $radius;
@@ -206,46 +198,38 @@ export default {
 .music-play{
   z-index: 99;
   border-color: #ff000000 !important;
-  // .before{
-  //   background-image: url('../assets/player/before.png') ;
-  // }
+  .before{
+    @include music-button;
+    background-image: url('../assets/player/before.png') ;
+  }
   .later {
     @include music-button;
     background-image: url('../assets/player/later.png') ;
   }
   // .music-controls{
-  //   background: #303133f5;
-  //   .ready_play, .playing {
-  //     background-size: 24px;
-  //     border-radius: 22px;
-  //     height: 40px;
-  //     width: 40px;
-  //   }
-  //   .ready_play {
-  //     background-image: url('../assets/player/ready-play.png') ;
-  //   }
-  //   .playing {
-  //     background-image: url('../assets/player/pause.png') ;
-  //   }
+    // background: #303133f5;
+    // .ready_play, .playing {
+    //   background-size: 24px;
+    //   border-radius: 22px;
+    //   height: 40px;
+    //   width: 40px;
+    // }
+  .ready_play {
+    @include music-button(40px, 40px, 20px, 25px);
+    background-position-x: 7px;
+    background-image: url('../assets/player/ready-play.png') ;
+  }
+  .playing {
+    @include music-button(40px, 40px, 20px, 25px);
+    background-image: url('../assets/player/pause.png') ;
+  }
   //   .volume {
   //     background-image: url('../assets/player/volume.png') ;
   //   }
-  //   .history {
-  //     background-image: url('../assets/player/history.png');
-  //     border: 1px solid white;
-  //     background-color: black;
-  //     background-position: center;
-  //     border-radius: 8px;
-  //     background-repeat: no-repeat;
-  //     background-size: 21px;
-  //     height: 32px;
-  //     width: 31px;
-  //     padding: 0px;
-  //   }
-  //   .history:hover {
-  //     box-shadow: 0px 0px 0px 1px #f2f6fc;
-  //   }
-  // }
+  .history {
+    @include music-button(40px, 40px, 10px, 25px);
+    background-image: url('../assets/player/history.png');
+  }
   div {
     div{
       background: #303133f5;

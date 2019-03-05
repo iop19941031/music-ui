@@ -5,7 +5,8 @@
       :data="list"
       style="width: 100%"
       @cell-click="columnClickEvent"
-      header-row-class-name="table-header">
+      header-row-class-name="table-header"
+      class="musicTable">
       <el-table-column
         prop="id"
         label=""
@@ -14,7 +15,8 @@
       <el-table-column
         class-name="play"
         label=""
-        width="40">
+        width="40"
+        ref="status">
       </el-table-column>
       <el-table-column
         prop="name"
@@ -79,16 +81,3 @@ export default {
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-
-.load-music {
-  font-size: 14px;
-  color: #303133c9;
-}
-.load-music:hover {
-  color: red;
-  cursor:pointer;
-}
-</style>

@@ -28,12 +28,12 @@ module.exports = {
     output: {
       libraryExport: 'default'
     },
-    externals: {
-      'vue': 'Vue',
-      'vuex': 'Vuex',
-      // 'vue-router': 'VueRouter',
-      'element-ui': 'ELEMENT'
-    }
+    // externals: {
+    //   'vue': 'Vue',
+    //   'vuex': 'Vuex',
+    //   // 'vue-router': 'VueRouter',
+    //   'element-ui': 'ELEMENT'
+    // }
   },
   // 基本路径
   baseUrl: undefined, // Type: string,Default: '/',部署应用包时的基本 URL。

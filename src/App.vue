@@ -24,12 +24,13 @@
         </el-container>
       </el-col>
     </el-row>
-    <Music class="footer"/>
+    <Music class="footer" />
     <el-button class="top" round v-show="topShow" @click="toTop" icon="el-icon-arrow-up" circle></el-button>
   </div>
 </template>
 
 <script>
+import './rem.js'
 import Vue from 'vue'
 import Music from './components/Music.vue'
 import MusicList from './components/MusicList.vue'

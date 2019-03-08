@@ -2,6 +2,21 @@
 
 dome：http://120.78.54.234:5000/
 
+需要配置后端访问本地音乐文件夹，详情：https://github.com/iop19941031/music-server
+
+## Project setup
+npm install
+### Compiles and hot-reloads for development
+npm run serve
+### Compiles and minifies for production
+npm run build
+### Run your tests
+npm run test
+### Lints and fixes files
+npm run lint
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
+
 目标功能
 
     首屏加载优化（开发阶段关闭）

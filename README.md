@@ -1,4 +1,4 @@
-技术栈 vue2 + vuex + vue-router + ES6 + axios + sass
+技术栈 vue2 + vuex + ES6 + axios + sass
 
 dome：http://120.78.54.234:5000/
 

@@ -33,8 +33,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
     音乐分类（未开发）
     项目结构
 
-.
-
+    .
     |-- dist                      编译后的文件目录
     |-- node_modules              依赖包
     |-- public                    模板文件和静态资源

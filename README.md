@@ -1,4 +1,6 @@
-技术栈 vue2 + vuex + ES6 + axios + sass
+技术栈 vue + vuex + ES6 + axios + SCSS
+
+使用vue-cli3构建项目
 
 dome：http://120.78.54.234:5000/
 

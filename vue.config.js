@@ -45,6 +45,6 @@ module.exports = {
   productionSourceMap: true, // Type: boolean,Type: boolean,Default: true,如果你不需要生产环境的 source map，可以将其设置为 false 以加速生产环境构建
   parallel: undefined, // Type: boolean,Default: require('os').cpus().length > 1,是否为 Babel 或 TypeScript 使用 thread-loader。该选项在系统的 CPU 有多于一个内核时自动启用，仅作用于生产构建
   css: {
-    sourceMap: false // Type: boolean,Default: false,是否为 CSS 开启 source map。设置为 true 之后可能会影响构建的性能
+    sourceMap: true // Type: boolean,Default: false,是否为 CSS 开启 source map。设置为 true 之后可能会影响构建的性能
   }
 }

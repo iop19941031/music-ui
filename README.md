@@ -20,14 +20,13 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 目标功能
 
     首屏加载优化（开发阶段关闭）
-    显示从服务器端获取到的所有歌曲信息
-    播放歌曲的定位
-    下一首歌功能，上一首功能，音乐播放历史
+    显示所有歌曲列表组件
+    播放歌曲的定位功能
+    点击播放上一首、下一首歌功能
+    音乐播放历史记录
     播放器隐藏功能
+    控制音量组件
     随机播放功能，其余播放功能待开发
-    音乐播放历史功能（未完成，封存代码中）
-    控制音乐播放、暂停组件（封存代码中）
-    控制音量组件（未开发）
     控制音乐进度组件（未开发）
     音乐分类（未开发）
     项目结构
@@ -42,6 +41,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
     |   |-- components                  组件
     |   |-- views                       路由组件，即某个路由直接指向该组件
     |   |-- element-variables.scss      Element-ui自定义主题
+    |   |-- rem.js                      自适应设置
     |   |-- App.vue                     根组件
     |   |-- router.js                   路由 vue-router
     |   |-- store.js                    状态 vuex
